@@ -11,25 +11,25 @@ public class Location {
     public Location(int locationID, String description) {
         this.locationID = locationID;
         this.description = description;
-        this.exits  = new HashMap<>();
+        this.exits = new HashMap<>();
         this.exits.put("Q", 0);
     }
 
-    public void addExist(String direction, int location){
+    protected void addExist(String direction, int location) {
         exits.put(direction, location);
     }
 
-    public int getLocationID() {
+    protected int getLocationID() {
         return locationID;
     }
 
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 
     //defensive coding. Returning a new exit map to prevent unwanted
     // tampering with exits HashMap.
-    public Map<String, Integer> getExits() {
+    protected Map<String, Integer> getExits() {
         return new HashMap<>(exits);
     }
 }

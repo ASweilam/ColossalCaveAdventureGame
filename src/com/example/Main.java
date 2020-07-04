@@ -8,7 +8,7 @@ public class Main {
     private static Map<Integer, Location> locations = new HashMap<>();
 
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
         Scanner scanner = new Scanner(System.in);
 
         locations.put(0, new Location(0, "You're in front of the computer"));
@@ -36,32 +36,44 @@ public class Main {
         locations.get(5).addExist("S", 1);
         locations.get(5).addExist("W", 2);
 
+        Map<String, String> options = Map.of("W", "WEST",
+                "E", "EAST",
+                "N", "NORTH",
+                "S", "SOUTH");
+
 
         int loc = 1;
-        while (true){
+        while (true) {
             System.out.println(locations.get(loc).getDescription());
-
-            if (loc ==0)
+            if (loc == 0)
                 break;
             Map<String, Integer> exits = locations.get(loc).getExits();
             System.out.println("Available exists are: ");
 
-            for (String exist: exits.keySet()
-                 ) {
+            for (String exist : exits.keySet()) {
                 System.out.print(exist + ", ");
             }
 
             System.out.println();
 
-            String direction = scanner.nextLine().toUpperCase();
+            String dir = null;
 
-            if (exits.containsKey(direction)){
-                loc = exits.get(direction);
+            String[] input = scanner.nextLine().toUpperCase().split(" ");
+
+            for (String word : input) {
+                if (options.containsKey(word.toUpperCase()))
+                    dir = word.toUpperCase();
+                else if (options.containsValue(word.toUpperCase()))
+                    dir = word.toUpperCase().substring(0, 1);
+                else
+                    System.out.println("That direction doesn't exist");
+            }
+
+            if (exits.containsKey(dir) && dir != null) {
+                loc = exits.get(dir.substring(0, 1));
             } else {
-                System.out.println("Wrong direction");
+                System.out.println("Error");
             }
         }
-
-
     }
 }
