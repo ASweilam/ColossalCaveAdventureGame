@@ -62,10 +62,10 @@ public class Main {
             String[] input = scanner.nextLine().toUpperCase().split(" ");
 
             for (String word : input) {
-                if (options.containsKey(word.toUpperCase()))
-                    dir = word.toUpperCase();
-                else if (options.containsValue(word.toUpperCase()))
-                    dir = word.toUpperCase().substring(0, 1);
+                if (options.containsKey(word))
+                    dir = word;
+                else if (options.containsValue(word))
+                    dir = word.substring(0, 1);
             }
 
             if(dir==null)
