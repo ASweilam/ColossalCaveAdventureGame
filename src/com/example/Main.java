@@ -39,7 +39,8 @@ public class Main {
         Map<String, String> options = Map.of("W", "WEST",
                 "E", "EAST",
                 "N", "NORTH",
-                "S", "SOUTH");
+                "S", "SOUTH",
+                "Q", "QUIT");
 
 
         int loc = 1;
@@ -65,15 +66,15 @@ public class Main {
                     dir = word.toUpperCase();
                 else if (options.containsValue(word.toUpperCase()))
                     dir = word.toUpperCase().substring(0, 1);
-                else
-                    System.out.println("That direction doesn't exist");
             }
 
-            if (exits.containsKey(dir) && dir != null) {
+            if(dir==null)
+                System.out.println("Direction doesn't exist");
+            else if (exits.containsKey(dir))
                 loc = exits.get(dir.substring(0, 1));
-            } else {
+            else
                 System.out.println("Error");
-            }
+
         }
     }
 }
